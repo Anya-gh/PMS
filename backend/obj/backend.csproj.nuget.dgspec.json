@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/anya/Documents/GitHub/pms/backend/backend.csproj": {}
+    "/Users/anya/Documents/GitHub/PMS/backend/backend.csproj": {}
   },
   "projects": {
-    "/Users/anya/Documents/GitHub/pms/backend/backend.csproj": {
+    "/Users/anya/Documents/GitHub/PMS/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/anya/Documents/GitHub/pms/backend/backend.csproj",
+        "projectUniqueName": "/Users/anya/Documents/GitHub/PMS/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/Users/anya/Documents/GitHub/pms/backend/backend.csproj",
+        "projectPath": "/Users/anya/Documents/GitHub/PMS/backend/backend.csproj",
         "packagesPath": "/Users/anya/.nuget/packages/",
-        "outputPath": "/Users/anya/Documents/GitHub/pms/backend/obj/",
+        "outputPath": "/Users/anya/Documents/GitHub/PMS/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/anya/.nuget/NuGet/NuGet.Config"
@@ -42,6 +42,30 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Newtonsoft.json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "PokeApiNet": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

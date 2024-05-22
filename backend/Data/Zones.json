@@ -1,0 +1,15 @@
+[ 
+  {
+    "Name" : "Emerald Grove",
+    "ID" : 1,
+    "Background" : "grassland",
+    "PokemonList" : [
+      {"PokeID" : 16, "MinLevel" : 2, "MaxLevel" : 4},
+      {"PokeID" : 194, "MinLevel" : 2, "MaxLevel" : 4},
+      {"PokeID" : 58, "MinLevel" : 3, "MaxLevel" : 5},
+      {"PokeID" : 403, "MinLevel" : 3, "MaxLevel" : 5},
+      {"PokeID" : 664, "MinLevel" : 2, "MaxLevel" : 2}
+    ],
+    "LevelRange": [2, 5]
+  }
+]

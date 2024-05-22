@@ -1,0 +1,117 @@
+[
+  {
+    "Name" : "Hardy"
+  },
+  {
+    "Name" : "Lonely",
+    "Atk" : 1.1,
+    "Def" : 0.9
+  },
+  {
+    "Name" : "Adamant",
+    "Atk" : 1.1,
+    "SpAtk" : 0.9
+  },
+  {
+    "Name" : "Naughty",
+    "Atk" : 1.1,
+    "SpDef" : 0.9
+  },
+  {
+    "Name" : "Brave",
+    "Atk" : 1.1,
+    "Spd" : 0.9
+  },
+  {
+    "Name" : "Bold",
+    "Def" : 0.9,
+    "Atk" : 1.1
+  },
+  {
+    "Name" : "Docile"
+  },
+  {
+    "Name" : "Relaxed",
+    "Def" : 1.1,
+    "Spd" : 0.9
+  },
+  {
+    "Name" : "Impish",
+    "Def" : 1.1,
+    "SpAtk" : 0.9
+  },
+  {
+    "Name" : "Lax",
+    "Def" : 1.1,
+    "SpDef" : 0.9
+  },
+  {
+    "Name" : "Timid",
+    "Spd" : 1.1,
+    "Atk" : 0.9
+  },
+  {
+    "Name" : "Hasty",
+    "Spd" : 1.1,
+    "Def" : 0.9
+  },
+  {
+    "Name" : "Serious"
+  },
+  {
+    "Name" : "Jolly",
+    "Spd" : 1.1,
+    "SpAtk" : 0.9
+  },
+  {
+    "Name" : "Naive",
+    "Spd" : 1.1,
+    "SpDef" : 0.9
+  },
+  {
+    "Name" : "Modest",
+    "SpAtk" : 1.1,
+    "Atk" : 0.9
+  },
+  {
+    "Name" : "Mild",
+    "SpAtk" : 1.1,
+    "Def" : 0.9
+  },
+  {
+    "Name" : "Quiet",
+    "SpAtk" : 1.1,
+    "Spd" : 0.9
+  },
+  {
+    "Name" : "Bashful"
+  },
+  {
+    "Name" : "Rash",
+    "SpAtk" : 1.1,
+    "SpDef" : 0.9
+  },
+  {
+    "Name" : "Calm",
+    "SpDef" : 1.1,
+    "Atk" : 0.9
+  },
+  {
+    "Name" : "Gentle",
+    "SpDef" : 1.1,
+    "Def" : 0.9
+  },
+  {
+    "Name" : "Sassy",
+    "SpDef" : 1.1,
+    "Spd" : 0.9
+  },
+  {
+    "Name" : "Careful",
+    "SpDef" : 1.1,
+    "SpAtk" : 0.9
+  },
+  {
+    "Name" : "Quirky"
+  }
+]
