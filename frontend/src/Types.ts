@@ -17,7 +17,8 @@ export type pokemonDetails = {
   move3: move,
   move4: move,
   ability: { name: string, description: string },
-  level: number
+  level: number,
+  description: string
 }
 
 export type move = {
@@ -32,3 +33,20 @@ export type move = {
 export type pokemonType = "normal" | "fire" | "fighting" | "water" | "flying" | "grass" | "poison" | 
 "electric" | "ground" | "psychic" | "rock" | "ice" | "bug" | "dragon" | "ghost" |
 "dark" | "steel" | "fairy"
+
+export type Zone = {
+  name: string,
+  background: string,
+  id: number,
+  pokemonList: ZonePokemon[],
+  minLevel: number,
+  maxLevel: number
+}
+
+export type ZonePokemon = {
+  name: string,
+  pokeID: number,
+  sprite: string,
+  minLevel: number,
+  maxLevel: number
+}

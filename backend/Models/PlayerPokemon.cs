@@ -17,6 +17,7 @@ public class PlayerPokemon {
   public PlayerPokemonMove? Move3 { get; set; }
   public PlayerPokemonMove? Move4 { get; set; }
   public PlayerPokemonAbility Ability { get; set; } = null!;
+  public string Description { get; set; } = "";
   public int Level { get; set; }
 }
 
@@ -28,11 +29,11 @@ public class PlayerPokemonMove {
   public string Description { get; set; }
   public string Type { get; set; }
 
-  public PlayerPokemonMove(string name, int? power, int? pp, int? accuracy, string description, string type)
+  public PlayerPokemonMove(string name, int? power, int? PP, int? accuracy, string description, string type)
   {
     Name = name;
     Power = power;
-    PP = pp;
+    this.PP = PP;
     Accuracy = accuracy;
     Description = description;
     Type = type;
@@ -57,27 +58,13 @@ public class PlayerPokemonNature {
   public float? SpDef { get; set; }
   public float? Spd { get; set; }
 
-  public PlayerPokemonNature(string name, float? atk, float? def, float? spatk, float? spdef, float? spd)
+  public PlayerPokemonNature(string name, float? atk, float? def, float? spAtk, float? spDef, float? spd)
   {
     Name = name;
     Atk = atk;
     Def = def;
-    SpAtk = spatk;
-    SpDef = spdef;
+    SpAtk = spAtk;
+    SpDef = spDef;
     Spd = spd;
   }
 }
-
-/*
-Need to store
-- Stats
-- Move set
-- Ability
-- Level
-
-Need to query
-- Move list
-- Sprite
-- Type
-- Name
-*/

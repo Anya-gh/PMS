@@ -33,16 +33,16 @@ using (StreamReader r = new StreamReader("Data/Zones.json"))
 
 PokeApiClient pokeClient = new PokeApiClient();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "PMS API. Hello!");
 
 app.MapGet("/test/add", async (PMSDb db) => {
   var pokemonList = new List<PlayerPokemonWrapper>
   {
-      await PokemonGenerator.GenerateEncounter(Zones[0]),
-      await PokemonGenerator.GenerateEncounter(Zones[0]),
-      await PokemonGenerator.GenerateEncounter(Zones[0]),
-      await PokemonGenerator.GenerateEncounter(Zones[0]),
-      await PokemonGenerator.GenerateEncounter(Zones[0])
+      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0])),
+      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0])),
+      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0])),
+      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0])),
+      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0]))
   };
   /*foreach (var pokemon in pokemonList) {
     db.PokemonItems.Add(pokemon);
@@ -53,15 +53,61 @@ app.MapGet("/test/add", async (PMSDb db) => {
   return pokemonList;
 });
 
-/*app.MapGet("/test/box", async (PMSDb db) => {
-  var pokemonList = new List<PlayerPokemonWrapper>();
-  foreach(var PokemonItem in db.PokemonItems)
+app.MapGet("/test/addToDB", async (PMSDb db) => {
+  var pokemonList = new List<PlayerPokemon>
   {
-    Pokemon currentPokemon = await pokeClient.GetResourceAsync<Pokemon>(PokemonItem.PokeID);
-    PlayerPokemonWrapper currentPokemonWrapper = new PlayerPokemonWrapper(PokemonItem, currentPokemon.Moves, currentPokemon.Sprites.FrontDefault, currentPokemon.Types, currentPokemon.Name);
+      await PokemonGenerator.GenerateEncounter(Zones[0]),
+      await PokemonGenerator.GenerateEncounter(Zones[0]),
+      await PokemonGenerator.GenerateEncounter(Zones[0]),
+      await PokemonGenerator.GenerateEncounter(Zones[0]),
+      await PokemonGenerator.GenerateEncounter(Zones[0])
+  };
+  foreach (var pokemon in pokemonList) {
+    db.PokemonItems.Add(pokemon);
+  }
+  db.SaveChanges();
+
+  return Results.Created("/test/addToDB", pokemonList);
+});
+
+app.MapGet("/box", async (PMSDb db) => {
+  var pokemonList = new List<PlayerPokemonWrapper>();
+  foreach(var playerPokemon in db.PokemonItems)
+  {
+    PlayerPokemonWrapper currentPokemonWrapper = await PokemonGenerator.GenerateWrapper(playerPokemon);
     pokemonList.Add(currentPokemonWrapper);
   }
   return pokemonList;
-});*/
+});
+
+app.MapGet("/getZones", () => {
+  if (Zones.Count > 0)
+  {
+    return Results.Ok(Zones);
+  }
+  else {
+    return Results.StatusCode(500);
+  }
+});
+
+app.MapGet("/getEncounter/{id}", async (int id, PMSDb db) => {
+  Zone? encounterZone = null;
+  foreach(var zone in Zones) {
+    if (zone.ID == id) {
+      encounterZone = zone;
+      break;
+    }
+  }
+  if (encounterZone is not null) {
+    PlayerPokemon pokemonEncounter = await PokemonGenerator.GenerateEncounter(encounterZone);
+    db.PokemonItems.Add(pokemonEncounter);
+    db.SaveChanges();
+    PlayerPokemonWrapper pokemonEncounterWrapper = await PokemonGenerator.GenerateWrapper(pokemonEncounter);
+    return Results.Ok(pokemonEncounterWrapper);
+  }
+  else {
+    return Results.NotFound();
+  }
+});
 
 app.Run();

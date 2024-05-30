@@ -9,7 +9,7 @@ public static class PokemonGenerator {
   private static PokeApiClient pokeClient = new PokeApiClient();
   private static List<PlayerPokemonNature> Natures = new List<PlayerPokemonNature>();
 
-  public static async Task<PlayerPokemon> Generate (int pokeID, int level = -1, List<PokemonMove>? pokemonMoves = null, PokemonAbility? ability = null) {
+  public static async Task<PlayerPokemon> Generate(int pokeID, int level = -1, List<PokemonMove>? pokemonMoves = null, PokemonAbility? ability = null) {
     Pokemon pokemon = await pokeClient.GetResourceAsync<Pokemon>(pokeID);
 
     level = (level < 0) ? random.Next(1, 101) : level; // if level not given generate random level from 1-100
@@ -39,6 +39,12 @@ public static class PokemonGenerator {
       if (flavourText.Language.Name.Equals("en")) { abilityDescription = flavourText.FlavorText; }
     }
 
+    PokemonSpecies speciesDetails = await pokeClient.GetResourceAsync(pokemon.Species);
+    string description = "";
+    foreach (var flavourText in speciesDetails.FlavorTextEntries) {
+      if (flavourText.Language.Name.Equals("en")) { description = flavourText.FlavorText; }
+    }
+
     PlayerPokemon playerPokemon = new PlayerPokemon {
       PokeID = pokeID, 
       HP = GenerateStat(pokemon.Stats[0].BaseStat, level, 1, true),
@@ -53,15 +59,14 @@ public static class PokemonGenerator {
       Move3 = numberOfMoves > 1 ? moves[2] : null,
       Move4 = numberOfMoves > 2 ? moves[3] : null,
       Ability = new PlayerPokemonAbility(ability.Ability.Name, abilityDescription),
-      Level = level
+      Level = level,
+      Description = description
     };
     return playerPokemon;
   }
 
-  public static async Task<PlayerPokemonWrapper> GenerateWrapper (int PokeID, int level = -1, List<PokemonMove>? moves = null, PokemonAbility? ability = null) 
-  {
-    Pokemon pokemon = await pokeClient.GetResourceAsync<Pokemon>(PokeID);
-    PlayerPokemon playerPokemon = await Generate(PokeID, level, moves, ability);
+  public static async Task<PlayerPokemonWrapper> GenerateWrapper(PlayerPokemon playerPokemon) {
+    Pokemon pokemon = await pokeClient.GetResourceAsync<Pokemon>(playerPokemon.PokeID);
     List<string> types = new List<string>();
     foreach (var type in pokemon.Types) {
       types.Add(type.Type.Name);
@@ -94,9 +99,9 @@ public static class PokemonGenerator {
     return moves;
   }
 
-  public static async Task<PlayerPokemonWrapper> GenerateEncounter(Zone zone) {
+  public static async Task<PlayerPokemon> GenerateEncounter(Zone zone) {
     ZonePokemon encounter = zone.PokemonList[random.Next(0, zone.PokemonList.Count)];
-    PlayerPokemonWrapper? pokemon = await GenerateWrapper(encounter.PokeID, random.Next(encounter.MinLevel, encounter.MaxLevel + 1));
+    PlayerPokemon pokemon = await Generate(encounter.PokeID, random.Next(encounter.MinLevel, encounter.MaxLevel + 1));
     return pokemon;
   }
 }

@@ -18,7 +18,7 @@ export default function PokemonBox({ pokemonData, filteredPokemonData, setFilter
   useEffect(() => {
     const newData = pokemonData.filter(pokemon => pokemon.name.includes(searchTerm.toLowerCase()))
     setFilteredPokemonData(newData)
-  }, [searchTerm])
+  }, [searchTerm, pokemonData, setFilteredPokemonData])
 
   return (
     <div className="w-72 mb-5">
