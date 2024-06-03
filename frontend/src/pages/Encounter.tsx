@@ -9,16 +9,16 @@ export default function Encounter() {
 
   const location = useLocation()
   const navigate = useNavigate()
-  const zone : Zone = location.state
+  const zone: Zone = location.state
+  useEffect(() => {
+    if (zone == undefined) { navigate('/') }
+  })
   const [pokemonEncounter, setPokemonEncounter] = useState<Pokemon>()
   const [encountered, setEncountered] = useState(false)
 
-  useEffect(() => {
-    console.log(pokemonEncounter)
-  }, [pokemonEncounter])
-
-
   return (
+    <>
+    {zone && 
     <div className='flex flex-col m-10 items-center'>
       <button className="rounded-xl shadow-heavy bg-[#2C2C2C] p-1 w-20 self-center mb-5" onClick={() => {navigate('/')}}>Back</button>
       <h1 className="text-white tracking-widest mb-5 text-xl">{zone.name} (Lv. {zone.minLevel} - {zone.maxLevel})</h1>
@@ -43,7 +43,8 @@ export default function Encounter() {
           <p className='italic text-zinc-500 text-sm mt-3'>{pokemonEncounter.pokemonDetails.description}</p>
         </div>
       }
-    </div>
+    </div>}
+    </>
   )
 }
 

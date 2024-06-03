@@ -57,7 +57,7 @@ export default function CurrentPokemonDisplay( { currentPokemon, setShowBox } : 
       <span className="flex flex-row self-start tracking-widest pb-3"><h1 className="capitalize pr-2">{currentPokemon.name}</h1><p>Lv. {currentPokemon.pokemonDetails.level}</p></span>
       <span className="flex flex-row self-start">
         {currentPokemon.types.map(type => {
-          return (<Type name={type} />)
+          return (<Type name={type} key={type}/>)
         })}
       </span>
       <img className="w-32" src={currentPokemon.sprite}/>
@@ -144,16 +144,25 @@ type StatsDisplayProps = {
 
 function StatsDisplay({ hp, atk, def, spAtk, spDef, spd} : StatsDisplayProps) {
 
-  // should be 25+stat/255 (or similar)
+  const [maxStat, setMaxStat] = useState(0)
+
+  const values = [hp, atk, def, spAtk, spDef, spd]
+  values.forEach(stat => {
+    if (stat > maxStat) {
+      setMaxStat(stat)
+    }
+  })
+  
+  // still need to set minimum
 
   return (
     <div className="flex flex-col items-start self-start text-sm">
-      <span style={{width: 25+hp*10}} className={`bg-green-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>HP:</p><p>{hp}</p></span>
-      <span style={{width: 25+atk*10}} className={`bg-yellow-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Atk:</p><p>{atk}</p></span>
-      <span style={{width: 25+def*10}} className={`bg-orange-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Def:</p><p>{def}</p></span>
-      <span style={{width: 25+spAtk*10}} className={`bg-cyan-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Sp.Atk:</p><p>{spAtk}</p></span>
-      <span style={{width: 25+spDef*10}} className={`bg-blue-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Sp.Def:</p><p>{spDef}</p></span>
-      <span style={{width: 25+spd*10}} className={`bg-purple-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Spd:</p><p>{spd}</p></span>
+      <span style={{width: (hp/maxStat)*200}} className={`bg-green-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>HP:</p><p>{hp}</p></span>
+      <span style={{width: (atk/maxStat)*200}} className={`bg-yellow-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Atk:</p><p>{atk}</p></span>
+      <span style={{width: (def/maxStat)*200}} className={`bg-orange-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Def:</p><p>{def}</p></span>
+      <span style={{width: (spAtk/maxStat)*200}} className={`bg-cyan-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Sp.Atk:</p><p>{spAtk}</p></span>
+      <span style={{width: (spDef/maxStat)*200}} className={`bg-blue-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Sp.Def:</p><p>{spDef}</p></span>
+      <span style={{width: (spd/maxStat)*200}} className={`bg-purple-400 rounded-r-xl p-1 flex flex-row justify-between`}><p>Spd:</p><p>{spd}</p></span>
     </div>
   )
 }
