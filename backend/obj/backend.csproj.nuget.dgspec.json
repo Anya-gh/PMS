@@ -64,6 +64,10 @@
             "PokeApiNet": {
               "target": "Package",
               "version": "[4.0.0, )"
+            },
+            "moq": {
+              "target": "Package",
+              "version": "[4.20.70, )"
             }
           },
           "imports": [

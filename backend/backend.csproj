@@ -13,6 +13,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
+    <PackageReference Include="moq" Version="4.20.70" />
     <PackageReference Include="Newtonsoft.json" Version="13.0.3" />
     <PackageReference Include="PokeApiNet" Version="4.0.0" />
   </ItemGroup>

@@ -159,3 +159,5 @@
 /Users/anya/Documents/GitHub/PMS/backend/bin/Debug/net8.0/Data/Zones.JSON
 /Users/anya/Documents/GitHub/PMS/backend/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/anya/Documents/GitHub/PMS/backend/bin/Debug/net8.0/Data/Natures.json
+/Users/anya/Documents/GitHub/PMS/backend/bin/Debug/net8.0/Castle.Core.dll
+/Users/anya/Documents/GitHub/PMS/backend/bin/Debug/net8.0/Moq.dll

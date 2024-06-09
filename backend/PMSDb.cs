@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 public class PMSDb : DbContext {
   public PMSDb(DbContextOptions options) : base(options) { }
-  public DbSet<PlayerPokemon> PokemonItems { get; set; }
+  public virtual DbSet<PlayerPokemon> PokemonItems { get; set; }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.Entity<PlayerPokemon>(entity => {

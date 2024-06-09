@@ -3,16 +3,28 @@ using PokeApiNet;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
-public static class PokemonGenerator {
+public interface IPokemonGenerator {
+  Task<PlayerPokemon> Generate(int pokeID, int level = -1, List<PokemonMove>? pokemonMoves = null, PokemonAbility? ability = null);
+  Task<PlayerPokemonWrapper> GenerateWrapper(PlayerPokemon playerPokemon);
+  Task<PlayerPokemon> GenerateEncounter(Zone zone);
+}
 
-  private static Random random = new Random();
-  private static PokeApiClient pokeClient = new PokeApiClient();
-  private static List<PlayerPokemonNature> Natures = new List<PlayerPokemonNature>();
+public class PokemonGenerator : IPokemonGenerator {
 
-  public static async Task<PlayerPokemon> Generate(int pokeID, int level = -1, List<PokemonMove>? pokemonMoves = null, PokemonAbility? ability = null) {
+  private Random random;
+  private PokeApiClient pokeClient;
+
+  public PokemonGenerator() {
+    random = new Random();
+    pokeClient = new PokeApiClient();
+  }
+  public async Task<PlayerPokemon> Generate(int pokeID, int level = -1, List<PokemonMove>? pokemonMoves = null, PokemonAbility? ability = null) {
+
     Pokemon pokemon = await pokeClient.GetResourceAsync<Pokemon>(pokeID);
 
     level = (level < 0) ? random.Next(1, 101) : level; // if level not given generate random level from 1-100
+
+    List<PlayerPokemonNature> Natures = new List<PlayerPokemonNature>();
 
     using (StreamReader r = new StreamReader("Data/Natures.json"))
     {
@@ -65,7 +77,7 @@ public static class PokemonGenerator {
     return playerPokemon;
   }
 
-  public static async Task<PlayerPokemonWrapper> GenerateWrapper(PlayerPokemon playerPokemon) {
+  public async Task<PlayerPokemonWrapper> GenerateWrapper(PlayerPokemon playerPokemon) {
     Pokemon pokemon = await pokeClient.GetResourceAsync<Pokemon>(playerPokemon.PokeID);
     List<string> types = new List<string>();
     foreach (var type in pokemon.Types) {
@@ -74,12 +86,12 @@ public static class PokemonGenerator {
     return new PlayerPokemonWrapper(playerPokemon, pokemon.Moves, pokemon.Sprites.FrontDefault, types, pokemon.Name);
   }
 
-  private static int GenerateStat(int baseStat, int level, float? nature, bool HP = false) {
+  private int GenerateStat(int baseStat, int level, float? nature, bool HP = false) {
     float natureModifier = nature is not null ? (float) nature : 1;
     return (int) Math.Floor((((baseStat * 2 * level) / 100) + (HP ? level + 10 : 5)) * natureModifier);
   }
 
-  private static async Task<List<PlayerPokemonMove>> GetMoves(List<PokemonMove> pokemonMoves)
+  private async Task<List<PlayerPokemonMove>> GetMoves(List<PokemonMove> pokemonMoves)
   {
     List<PlayerPokemonMove> moves = new List<PlayerPokemonMove>();
     foreach (var pokemonMove in pokemonMoves) {
@@ -99,7 +111,7 @@ public static class PokemonGenerator {
     return moves;
   }
 
-  public static async Task<PlayerPokemon> GenerateEncounter(Zone zone) {
+  public async Task<PlayerPokemon> GenerateEncounter(Zone zone) {
     ZonePokemon encounter = zone.PokemonList[random.Next(0, zone.PokemonList.Count)];
     PlayerPokemon pokemon = await Generate(encounter.PokeID, random.Next(encounter.MinLevel, encounter.MaxLevel + 1));
     return pokemon;

@@ -32,7 +32,7 @@ export default function Encounter() {
               <p className="capitalize tracking-widest absolute top-96 font-bold">{pokemonEncounter.name} Lv. {pokemonEncounter.pokemonDetails.level}</p>
             </div>
            : !encountered && 
-            <button onClick={() => {getEncounter(zone.id, setPokemonEncounter); setEncountered(true)}} className="flex flex-col items-center mt-20">
+            <button data-testid="encounter-button" onClick={() => {getEncounter(zone.id, setPokemonEncounter); setEncountered(true)}} className="flex flex-col items-center mt-20">
               <img className="w-10 animate-bounce" src={pokeball} />
             </button>
           }

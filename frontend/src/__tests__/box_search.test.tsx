@@ -23,8 +23,6 @@ describe('Seach function testing', () => {
       expect(within(container).getAllByRole('img').length).toBeGreaterThan(0)
     })
 
-    screen.debug()
-
     const items = within(container).getAllByRole('img')
     items.forEach(item => {
       expect(item.hasAttribute('alt'))

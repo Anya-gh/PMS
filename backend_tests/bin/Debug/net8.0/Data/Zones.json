@@ -1,0 +1,30 @@
+[ 
+  {
+    "Name" : "Emerald Grove",
+    "ID" : 1,
+    "Background" : "grassland",
+    "PokemonList" : [
+      {"PokeID": 16, "Name": "Pidgey", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png", "MinLevel": 2, "MaxLevel": 4},
+      {"PokeID": 194, "Name": "Wooper", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/194.png", "MinLevel": 2, "MaxLevel": 4},
+      {"PokeID": 58, "Name": "Growlithe", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/58.png", "MinLevel": 3, "MaxLevel": 5},
+      {"PokeID": 403, "Name": "Shinx", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/403.png", "MinLevel": 3, "MaxLevel": 5},
+      {"PokeID": 664, "Name": "Scatterbug", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/664.png", "MinLevel": 2, "MaxLevel": 3}
+    ],
+    "MinLevel" : 2,
+    "MaxLevel" : 5
+  },
+  {
+    "Name" : "Azure Park",
+    "ID" : 2,
+    "Background" : "riparian",
+    "PokemonList" : [
+      {"PokeID": 129, "Name": "Magikarp", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/129.png", "MinLevel": 10, "MaxLevel": 15},
+      {"PokeID": 341, "Name": "Corphish", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/341.png", "MinLevel": 12, "MaxLevel": 16},
+      {"PokeID": 692, "Name": "Clauncher", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/692.png", "MinLevel": 15, "MaxLevel": 19},
+      {"PokeID": 12, "Name": "Butterfree", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png", "MinLevel": 10, "MaxLevel": 14},
+      {"PokeID": 446, "Name": "Munchlax", "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/446.png", "MinLevel": 16, "MaxLevel": 20}
+    ],
+    "MinLevel": 10,
+    "MaxLevel": 20
+  }
+]
