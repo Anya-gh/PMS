@@ -20,7 +20,7 @@ export default function Home() {
     fetch("http://localhost:5287/box")
       .then(res => res.json())
       .then(res => { setPokemonData(res); setFilteredPokemonData(res); });
-    fetch("http://localhost:5287/getZones")
+    fetch("http://localhost:5287/zones")
       .then(res => res.json())
       .then(res => setZoneData(res))
   }, [])

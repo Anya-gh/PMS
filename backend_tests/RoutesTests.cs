@@ -73,7 +73,6 @@ public class RoutesTests
 
       // Act
       var result = await RouteHandlers.GetEncounter(1, mockContext.Object, mockGenerator.Object);
-      Console.WriteLine(result.GetType());
 
       var okResult = result as Ok<PlayerPokemonWrapper>;
 

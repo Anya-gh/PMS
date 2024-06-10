@@ -1,8 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PokeApiNet;
 using Newtonsoft.Json;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -26,49 +23,18 @@ var optionsBuilder = new DbContextOptionsBuilder<PMSDb>();
 app.MapGet("/", () => "PMS API. Hello!");
 
 PokemonGenerator generator = new PokemonGenerator();
-/*
-app.MapGet("/test/add", async (PMSDb db) => {
-  var pokemonList = new List<PlayerPokemonWrapper>
-  {
-      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0])),
-      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0])),
-      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0])),
-      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0])),
-      await PokemonGenerator.GenerateWrapper(await PokemonGenerator.GenerateEncounter(Zones[0]))
-  };
-  foreach (var pokemon in pokemonList) {
-    db.PokemonItems.Add(pokemon);
-  }
-  await db.SaveChangesAsync();
-
-  return Results.Created("/test/add", pokemonList);
-  return pokemonList;
-});
-
-app.MapGet("/test/addToDB", async (PMSDb db) => {
-  var pokemonList = new List<PlayerPokemon>
-  {
-      await PokemonGenerator.GenerateEncounter(Zones[0]),
-      await PokemonGenerator.GenerateEncounter(Zones[0]),
-      await PokemonGenerator.GenerateEncounter(Zones[0]),
-      await PokemonGenerator.GenerateEncounter(Zones[0]),
-      await PokemonGenerator.GenerateEncounter(Zones[0])
-  };
-  foreach (var pokemon in pokemonList) {
-    db.PokemonItems.Add(pokemon);
-  }
-  db.SaveChanges();
-
-  return Results.Created("/test/addToDB", pokemonList);
-});*/
 
 app.MapGet("/box", async (PMSDb db) => await RouteHandlers.GetBox(db, generator));
 
-app.MapGet("/getZones", () => RouteHandlers.GetZones());
+app.MapGet("/zones", () => RouteHandlers.GetZones());
 
-app.MapGet("/getEncounter/{id}", async (int id, PMSDb db) => await RouteHandlers.GetEncounter(id, db, generator));
+app.MapPost("/encounter", async (EncounterRequest request, PMSDb db) => await RouteHandlers.GetEncounter(request.ZoneID, db, generator));
 
 app.Run();
+
+public class EncounterRequest {
+  public int ZoneID {get; set;}
+}
 
 public static class RouteHandlers {
 
@@ -123,6 +89,6 @@ public static class RouteHandlers {
     }
     else {
       return Results.NotFound();
-  }
+    }
   }
 }

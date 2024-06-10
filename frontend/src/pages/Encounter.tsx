@@ -75,7 +75,11 @@ function ViewEncounters( { pokemonList } : ViewEncountersProps) {
 }
 
 const getEncounter = ( zoneID:number, setPokemonEncounter:Dispatch<SetStateAction<Pokemon | undefined>> ) => {
-  fetch(`http://localhost:5287/getEncounter/${zoneID}`)
+  fetch(`http://localhost:5287/encounter`, {
+    method: "POST",
+    headers: { "Content-Type" : "application/json" },
+    body: JSON.stringify({"ZoneID" : zoneID})
+  })
   .then(res => res.json())
   .then(res => setPokemonEncounter(res))
 }
